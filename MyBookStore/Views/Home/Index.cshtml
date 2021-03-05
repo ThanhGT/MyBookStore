@@ -1,0 +1,13 @@
+﻿@model BookListView
+
+<h4>Welcome to My Book Store</h4>
+
+@foreach (var item in Model.Books)
+{
+    <partial name="BookSummary" model="item" />
+}
+
+<div page-model="Model.PageInfo" page-action="Index" page-classes-enabled="true"
+     page-class="btn" page-class-normal="btn-outline-dark"
+     page-url-category="@Model.CurrentCategory"
+     page-class-selected="btn-primary" class="btn-group dropup m-1">   </div>
