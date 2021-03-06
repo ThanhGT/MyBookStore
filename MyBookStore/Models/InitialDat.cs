@@ -12,6 +12,8 @@ namespace MyBookStore.Models
             MBS_DBContext context = app.ApplicationServices
                                     .CreateScope().ServiceProvider
                                     .GetRequiredService<MBS_DBContext>();
+
+            //check if there are any pending migrations and if there are then do all the migrations (found in migration folder)
             if (context.Database.GetPendingMigrations().Any())
             {
                 context.Database.Migrate();

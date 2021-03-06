@@ -30,9 +30,12 @@ namespace MyBookStore
                 opts.UseSqlServer(Configuration["ConnectionStrings:MBSConnStr"]);
             });
             services.AddScoped<IBookRepository, EFStoreRepository>();
+            services.AddScoped<IOrderRepository, EFOrderRepository>();
             services.AddRazorPages();
             services.AddDistributedMemoryCache();
             services.AddSession();
+            services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         //gets called at runtime, used to configure HTTP request pipeline

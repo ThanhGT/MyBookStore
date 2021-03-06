@@ -10,7 +10,7 @@ namespace MyBookStore.Models
         public List<CartLine> Lines { get; set; } = new List<CartLine>();
 
         //Add the book to the cart
-        public void AddItem(Book book, int quantity)
+        public virtual void AddItem(Book book, int quantity)
         {
             //check if book id inside cart matches with book id of the book stored in model class
             CartLine line = Lines
@@ -28,18 +28,18 @@ namespace MyBookStore.Models
             }
             else
             {
-                line.Quantity = +quantity;
+                line.Quantity += quantity;
             }
         }
 
         //remove the book from cart
-        public void RemoveLines(Book book)
+        public virtual void RemoveLines(Book book)
         {
             Lines.RemoveAll(l => l.Book.BookID == book.BookID);
         }
 
         //clear all books from cart
-        public void Clear() => Lines.Clear();
+        public virtual void Clear() => Lines.Clear();
 
         public decimal TotalCost() =>
             Lines.Sum(c => c.Book.Price * c.Quantity);
